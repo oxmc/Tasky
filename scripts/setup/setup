@@ -1,0 +1,52 @@
+#!/bin/bash
+DIRECTORY="$(readlink -f "$(dirname "$(dirname "$(dirname "$0")")")")"
+AppName="$(cat $DIRECTORY/data/info/appname.inf)"
+step=1
+
+function error {
+  echo -e "\e[91m$1\e[39m"
+  exit 1
+}
+
+function SetupWindow {
+  yad --separator='\n' --title="$AppName Setup Step:$step" --center --width='300' --height='300' --text-align="center" --text="What will you use $AppName for? \n 1.Adding Bots to my server \n 2.Creating Bots for my server \n or 3.other." --window-icon="${DIRECTORY}/icons/logo.png" --button=1!'1':4 --button=2!'2':5 --button=3!'3':6
+
+  button=$? #get exit code to determine which button was pressed.
+
+  if [ $button -eq 4 ];then
+    step=$((step+1))
+    echo "Step:$step Button:1"
+    echo "
+    Installing Bots to server
+    " > $DIRECTORY/data/setup/use
+  elif [ $button -eq 5 ];then
+    step=$((step+1))
+    echo "Step:$step Button:2"
+    echo "
+    Creating Bots for server
+    " > $DIRECTORY/data/setup/use
+  elif [ $button -eq 6 ];then
+    step=$((step+1))
+    echo "Step:$step Button:3"
+    echo "
+    other
+    " > $DIRECTORY/data/setup/use
+  elif [ $button -eq 7 ];then
+    step=$((step+1))
+    yad --separator='\n' --title="$AppName Setup Step:$step" --center --width='300' --height='300' --text-align="center" --text="Welcome to the $AppName Setup wizard!" --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':2 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':3
+  else
+    error "Unkown button input recived: $button"
+  fi
+}
+
+yad --separator='\n' --title="$AppName Setup" --center --width='300' --height='300' --text-align="center" --text="Welcome to the $AppName Setup wizard! \n This tool will help guide you through installing $AppName." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
+
+button=$? #get exit code to determine which button was pressed.
+
+if [ $button -eq 0 ];then
+  exit 0
+elif [ $button -eq 1 ];then
+  SetupWindow
+else
+  error "Unkown button input recived: $button"
+fi

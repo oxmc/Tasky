@@ -1,0 +1,5 @@
+#Specify which text editor to use when editing or viewing Tasks
+geany
+mousepad
+leafpad
+nano

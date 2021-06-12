@@ -1,0 +1,41 @@
+#!/bin/bash
+DIRECTORY="$(readlink -f "$(dirname "$0")")"
+AppName="$(cat $DIRECTORY/data/info/appname.inf)"
+
+function error {
+  echo -e "\e[91m$1\e[39m"
+  exit 1
+}
+
+#install yad automatically
+if ! command -v yad >/dev/null;then
+  if [ -f /usr/bin/apt ];then
+    sudo apt update
+    sudo apt install -y yad || error "Failed to install yad."
+  else
+    error "Failed to find any package manager to install yad."
+  fi
+fi
+
+#remove annoying YAD icon browser launcher
+sudo rm -f /usr/share/applications/yad-icon-browser.desktop
+
+#$1 is usually left blank. if so, open gui
+if [ "$1" == '' ];then
+  #Run gui script
+  bash "$DIRECTORY/scripts/gui"
+#$1 is usually left blank. if it equals 'gui', open gui
+elif [ "$1" == 'gui' ];then
+  #Run gui script
+  bash "$DIRECTORY/scripts/gui"
+#$1 is usually left blank. If it equals 'settings', then open settings.
+elif [ "$1" == 'settings' ];then
+  #Open settings script
+  bash "$DIRECTORY/scripts/settings"
+#$1 is usually left blank. If it equals 'update', then open updater
+elif [ "$1" == 'update' ];then
+  #Open update script
+  bash "$DIRECTORY/scripts/updater"
+else
+error "Unkown argument: $1"
+fi

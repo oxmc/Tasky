@@ -1,0 +1,60 @@
+#!/bin/bash
+DIRECTORY="$(readlink -f "$(dirname "$(dirname "$0")")")"
+AppName="$(cat $DIRECTORY/data/info/appname.inf)"
+Used="$(cat $DIRECTORY/data/info/opd)"
+
+function error {
+  echo -e "\e[91m$1\e[39m"
+  exit 1
+}
+
+#Display MainMenu if program has been used before.
+if [ $Used == "True" ]; then
+  yad ---separator='\n' -title="$AppName" --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName!"
+else #Display StartupMenu.
+  yad --separator='\n' --title="$AppName" --center --width='300' --height='300' --text-align="center" --text="Thanks for instaling $AppName! \nClick next to continue to setup." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue to setup.':1
+fi
+button=$? #get exit code to determine which button was pressed.
+
+if [ $button -eq 0 ];then
+  if [ -z "$prefix" ];then
+        buttons=("--button=!${DIRECTORY}/icons/install.png!Install:4" \
+        "--button=!${DIRECTORY}/icons/uninstall.png!Uninstall:2" \
+        "--button=!${DIRECTORY}/icons/info.png!View more about the selected software:0" )
+      else
+        buttons=("--button=!${DIRECTORY}/icons/back.png!Back:3" \
+        "--button=!${DIRECTORY}/icons/install.png!Install:4" \
+        "--button=!${DIRECTORY}/icons/uninstall.png!Uninstall:2" \
+        "--button=!${DIRECTORY}/icons/info.png!Details:0" )
+      fi
+
+      output="$(echo -e "$LIST" | yad --center --title='Pi-Apps'"$([ ! -z "$prefix" ] && echo ": $(echo "$prefix" | tr '/' '>')")" --width=310 --height=400 --no-headers \
+        --text="$([ -z "$prefix" ] && echo "$motd" || echo "Viewing $(echo "$prefix" | tr '/' '>') category")" --image="${DIRECTORY}/icons/logo-64.png" --image-on-top \
+        --list --multiple --separator='\n' --window-icon="${DIRECTORY}/icons/logo.png" \
+        --column=:IMG --column=:IMG --column=Name --column=Sysname:HD --column=tip:HD \
+        --print-column=4 --tooltip-column=5 \
+        "${buttons[@]}" \
+      )"
+
+      button=$? #get exit code to determine which button was pressed
+      echo "Button: ${button}"
+      if [ $button -eq 252 ];then #if window manager x was pressed
+        exit 0
+      fi
+      if [ "$button" == 3 ];then
+        #back button
+        break
+      fi
+      if [ -z "$output" ];then
+        echo "output variable empty!"
+        yad --center --title=" "$AppName" --width=310 \
+          --window-icon="${DIRECTORY}/icons/logo.png" \
+          --text="Mind reading is not supported.
+    (You didn"\'"t select a Task.)" \
+          --button=OK:0
+      fi
+elif [ $button -eq 1 ];then
+  bash "$DIRECTORY/scripts/setup/setup"
+else
+  error "Unkown button input recived: $button"
+fi
