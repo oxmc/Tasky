@@ -37,7 +37,7 @@ function SetupWindow {
   fi
 }
 
-yad --separator='\n' --title="How to use $AppName" --center --width='300' --height='300' --text-align="center" --text="Welcome to the $AppName! \n This tool will help guide you through using $AppName." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
+yad --separator='\n' --title="How to use $AppName" --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \n This tool will help guide you through using $AppName." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
 
 button=$? #get exit code to determine which button was pressed.
 
@@ -46,6 +46,8 @@ if [ $button -eq 0 ];then
   bash $DIRECTORY/main
 elif [ $button -eq 1 ];then
   SetupWindow
+elif [ $button -eq 252 ];then
+  exit 0
 else
   error "Unkown button input recived: $button"
 fi
