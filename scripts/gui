@@ -47,11 +47,7 @@ if [ $button -eq 0 ];then
       fi
       if [ -z "$output" ];then
         echo "output variable empty!"
-        yad --center --title=" "$AppName" --width=310 \
-          --window-icon="${DIRECTORY}/icons/logo.png" \
-          --text="Mind reading is not supported.
-    (You didn"\'"t select a Task.)" \
-          --button=OK:0
+        yad --center --title="$AppName" --width=310 --window-icon="${DIRECTORY}/icons/logo.png" --text="Mind reading is not supported. (You didn"\'"t select a Task.)" --button=OK:0
       fi
 elif [ $button -eq 1 ];then
   bash "$DIRECTORY/scripts/setup/setup"
