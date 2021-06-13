@@ -3,10 +3,8 @@ DIRECTORY="$(readlink -f "$(dirname "$(dirname "$(dirname "$0")")")")"
 AppName="$(cat $DIRECTORY/data/info/appname.inf)"
 step=1
 
-function error {
-  echo -e "\e[91m$1\e[39m"
-  exit 1
-}
+#load functions
+source "${DIRECTORY}/scripts/functions" || error "failed to source ${DIRECTORY}/scripts/functions"
 
 function SetupWindow {
   yad --separator='\n' --title="$AppName Setup Step:$step" --center --width='300' --height='300' --text-align="center" --text="What will you use $AppName for? \n 1.Adding Bots to my server \n 2.Creating Bots for my server \n or 3.other." --window-icon="${DIRECTORY}/icons/logo.png" --button=1!'1':4 --button=2!'2':5 --button=3!'3':6
@@ -39,12 +37,13 @@ function SetupWindow {
   fi
 }
 
-yad --separator='\n' --title="$AppName Setup" --center --width='300' --height='300' --text-align="center" --text="Welcome to the $AppName Setup wizard! \n This tool will help guide you through installing $AppName." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
+yad --separator='\n' --title="How to use $AppName" --center --width='300' --height='300' --text-align="center" --text="Welcome to the $AppName! \n This tool will help guide you through using $AppName." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
 
 button=$? #get exit code to determine which button was pressed.
 
 if [ $button -eq 0 ];then
-  exit 0
+  echo "True" > $DIRECTORY/data/info/opd
+  bash $DIRECTORY/main
 elif [ $button -eq 1 ];then
   SetupWindow
 else

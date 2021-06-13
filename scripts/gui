@@ -18,7 +18,7 @@ button=$? #get exit code to determine which button was pressed.
 if [ $button -eq 0 ];then
   echo "exit"
 elif [ $button -eq 1 ];then
-  bash "$DIRECTORY/scripts/setup/setup"
+  bash "$DIRECTORY/scripts/firstrun/learn"
 else
   error "Unkown button input recived: $button"
 fi
