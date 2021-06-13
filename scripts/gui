@@ -1,5 +1,5 @@
 #!/bin/bash
-DIRECTORY="$(readlink -f "$(dirname "$0")")"
+DIRECTORY="$(readlink -f "$(dirname "$(dirname "$0")")")"
 AppName="$(cat $DIRECTORY/data/info/appname.inf)"
 Used="$(cat $DIRECTORY/data/info/opd)"
 
