@@ -4,7 +4,7 @@ AppName="$(cat $DIRECTORY/data/info/appname.inf)"
 Used="$(cat $DIRECTORY/data/info/opd)"
 
 #load functions
-source "${DIRECTORY}/functions" || error "failed to source ${DIRECTORY}/functions"
+source "${DIRECTORY}/scripts/functions" || error "failed to source ${DIRECTORY}/scripts/functions"
 
 #Display MainMenu if program has been used before.
 if [ $Used == "True" ]; then
