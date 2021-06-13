@@ -7,7 +7,7 @@ step=1
 source "${DIRECTORY}/scripts/functions" || error "failed to source ${DIRECTORY}/scripts/functions"
 
 function SetupWindow {
-  yad --separator='\n' --title="$AppName Part:$step" --image="/home/pi/CryApp/icon.png" --center --width='300' --height='300' --text-align="center" --text="Click the '+' button to add a task or reminder." --window-icon="${DIRECTORY}/icons/logo.png" --button=1!'exit':4 --button=2!'next':5
+  yad --separator='\n' --title="$AppName Part:$step" --image="/home/pi/CryApp/icon.png" --center --width='300' --height='300' --text-align="center" --text="Click the '+' button to add a task or reminder." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':4 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':5
 
   button=$? #get exit code to determine which button was pressed.
 
