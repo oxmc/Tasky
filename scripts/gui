@@ -21,9 +21,9 @@ if [ $Used == "True" ]; then
     if [ -z "$OPTION" ]; then
       yad --separator='\n' --title="Error" --window-icon="${DIRECTORY}/icons/courupted.png" --center --width='300' --height='300' --text-align="center" --text="Error! \nYou didn't select a Task/Reminder! Please select a Task/Reminder and try again." --button="Ok"!"${DIRECTORY}/icons/back.png"!'Go back and select Task/Reminder to delete.':5
       bash $DIRECTORY/main "gui"
-    elif [ $button -eq 252 ];then
+    elif [ "$button" -eq 252 ];then
       exit 0
-    elif [ $button -eq 4 ];then
+    elif [ "$button" -eq 4 ];then
       echo "User wants to edit: $OPTION"
     else
       error "Unkown button input recived: $button"
