@@ -41,6 +41,20 @@ elif [ $button -eq 2 ];then
   nameofnew="$(yad --entry --window-icon="${DIRECTORY}/icons/logo.png" --separator='\n' --title="Create a new Task/Reminder" --center --text-align="center" --entry-label="Name of new Task/Reminder:")"
   selecteddate="$(yad --calendar --window-icon="${DIRECTORY}/icons/logo.png" --title="Select a date" --height="200" --width="400")"
   yad --separator='\n' --window-icon="${DIRECTORY}/icons/logo.png" --title="Is this correct?" --center --width='300' --height='300' --text-align="center" --text="Is this correct? \nName of Task/Reminder: '$nameofnew'\nSelected date for new Task/Reminder: '$selecteddate'" --button="No"!"${DIRECTORY}/icons/exit.png"!'No':2 --button='Yes'!"${DIRECTORY}/icons/check.png"!'yes':3
+  if grep -q "$nameofnew" "$DIRECTORY/Tasks/Tasks.txt"; then
+      error "$nameofnew already exists."
+      bash $DIRECTORY/main "gui"
+  else
+      echo "Creating new Task/Reminder..."
+      if [ -f "$DIRECTORY/Tasks/Tasks.txt" ];then
+        echo "$nameofnew|$selecteddate" >> $DIRECTORY/Tasks/Tasks.txt
+      else
+        mkdir -p $DIRECTORY/Tasks
+        echo "$nameofnew|$selecteddate" >> $DIRECTORY/Tasks/Tasks.txt
+      fi
+      echo "Done!"
+      bash $DIRECTORY/main "gui"
+  fi
 elif [ $button -eq 3 ];then
   if [ -d "$DIRECTORY/Tasks" ]; then
     yad
