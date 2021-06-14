@@ -9,7 +9,7 @@ source "${DIRECTORY}/scripts/functions" || error "failed to source ${DIRECTORY}/
 #Display MainMenu if program has been used before.
 if [ $Used == "True" ]; then
   #Display Tasks/Reminders if there are any
-  if [ -d "$DIRECTORY/Tasks" ]; then
+  if [ -f "$DIRECTORY/Tasks/Tasks.txt" ]; then
     while IFS='|' read -r Name Date _; do
         if [[ $Name || $Date ]]; then
           items+=( "$Name" "$Date" )
