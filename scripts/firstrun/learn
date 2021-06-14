@@ -43,7 +43,7 @@ if [ $button -eq 0 ];then
 elif [ $button -eq 1 ];then
   SetupWindow
 elif [ $button -eq 252 ];then
-  exit 0
+  echo "True" > $DIRECTORY/data/info/opd
 else
   error "Unkown button input recived: $button"
 fi
