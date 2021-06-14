@@ -8,14 +8,12 @@ function error {
 }
 
 function CheckTask {
-  while IFS='|' read -r Name Date _; do
+  while IFS='|' read -r Name Date Date1 Date2 Date3 Date4 Date5 Date6 Date7 _; do
       if [[ $Name || $Date ]]; then
-          items+=( "$Name" "$Date" )
+          items+=( "$Name" "$Date $Date1 $Date2 $Date3 $Date4 $Date5 $Date6 $Date7" )
       else
           items+=( "None" "None" )
       fi
   done < <(sort -t'|' -k2 $DIRECTORY/Tasks/Tasks.txt)
-  selected=$(--list \
-               --separator= --column=Task/Reminder --column=Date \
-               "${items[@]}")
+  selected=$(--column=List --column=ID:NUM "${items[@]}")
 }
