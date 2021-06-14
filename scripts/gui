@@ -18,7 +18,7 @@ if [ $Used == "True" ]; then
         fi
     done < <(sort -t'|' -k2 $DIRECTORY/Tasks/Tasks.txt)
     OPTION="$(yad --separator='\n' --title="$AppName" --window-icon="${DIRECTORY}/icons/logo.png" --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button="Delete Task/Reminder"!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3 --list --column=Task/Reminder "${items[0]}" --column=Date "${items[1]}")"
-    if [ $OPTION -eq nill ];then
+    if [ $OPTION -eq null ];then
       yad --separator='\n' --title="Error" --window-icon="${DIRECTORY}/icons/courupted.png" --center --width='300' --height='300' --text-align="center" --text="Error! \nYou didn't select a Task/Reminder! Please select a Task/Reminder and try again." --button="Ok"!"${DIRECTORY}/icons/back.png"!'Go back and select Task/Reminder to delete.':4
       bash $DIRECTORY/main "gui"
     elif [ $button -eq 252 ];then
