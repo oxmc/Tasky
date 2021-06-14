@@ -11,7 +11,8 @@ if [ $Used == "True" ]; then
   #Display Tasks/Reminders if there are any
   if [ -d "$DIRECTORY/Tasks" ]; then
     CheckTask
-    yad --separator='\n' --title="$AppName" $Tasks --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3
+    echo "$Tasks"
+    yad --separator='\n' --title="$AppName" --list $Tasks --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3
   else
     yad --separator='\n' --title="$AppName" --center --width='300' --height='100' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3
    fi
