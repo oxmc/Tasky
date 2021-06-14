@@ -8,7 +8,7 @@ source "${DIRECTORY}/scripts/functions" || error "failed to source ${DIRECTORY}/
 
 #Display MainMenu if program has been used before.
 if [ $Used == "True" ]; then
-  yad ---separator='\n' --title="$AppName" --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/plus.png"!'Create a new Task/Reminder':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
+  yad ---separator='\n' --title="$AppName" --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':0 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':1
   yad --calendar --title="Select a date" --height="200" --width="400"
 else #Display StartupMenu.
   yad --separator='\n' --title="$AppName" --center --width='300' --height='300' --text-align="center" --text="Thanks for instaling $AppName! \nClick next to learn how to use $AppName." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
