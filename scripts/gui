@@ -21,7 +21,7 @@ elif [ $button -eq 1 ];then
 elif [ $button -eq 2 ];then
   nameofnew="$(yad --entry --separator='\n' --title="Create a new Task/Reminder" --center --text-align="center" --entry-label="Name of new Task/Reminder:")"
   selecteddate="$(yad --calendar --title="Select a date" --height="200" --width="400")"
-  yad --separator='\n' --title="Is this correct?" --center --width='300' --height='300' --text-align="center" --text="Is this correct? \nName of Task/Reminder:$nameofnew\nSelected date for new Task/Reminder:$selecteddate" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3
+  yad --separator='\n' --title="Is this correct?" --center --width='300' --height='300' --text-align="center" --text="Is this correct? \nName of Task/Reminder: '$nameofnew'\nSelected date for new Task/Reminder: '$selecteddate'" --button="No"!"${DIRECTORY}/icons/exit.png"!'No':2 --button='Yes'!"${DIRECTORY}/icons/check.png"!'yes':3
 elif [ $button -eq 3 ];then
   d
 elif [ $button -eq 252 ];then
