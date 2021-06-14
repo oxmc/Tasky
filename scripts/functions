@@ -14,6 +14,6 @@ function CheckTask {
           items+=( "None" "None" )
       fi
   done < <(sort -t'|' -k2 $DIRECTORY/Tasks/Tasks.txt)
-  local selected="--list --separator= --column=Task/Reminder "${items[1]}" --column=Date "${items[2]}""
+  local selected="--list --separator= --column=Task/Reminder "${items[0]}" --column=Date "${items[1]}""
   eval $Tasks="'$selected'"
 }
