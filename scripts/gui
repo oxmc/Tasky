@@ -17,12 +17,12 @@ if [ $Used == "True" ]; then
           items+=( "None" "None" )
       fi
   done < <(sort -t'|' -k2 $DIRECTORY/Tasks/Tasks.txt)
-    yad --separator='\n' --title="$AppName" --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button="Delete Task/Reminder"!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3 --list --column=Task/Reminder "${items[0]}" --column=Date "${items[1]}"
+    yad --separator='\n' --title="$AppName" --window-icon="${DIRECTORY}/icons/logo.png" --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button="Delete Task/Reminder"!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3 --list --column=Task/Reminder "${items[0]}" --column=Date "${items[1]}"
   else
-    yad --separator='\n' --title="$AppName" --center --width='300' --height='100' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3
+    yad --separator='\n' --title="$AppName" --window-icon="${DIRECTORY}/icons/logo.png" --center --width='300' --height='100' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3
    fi
 else #Display StartupMenu.
-  yad --separator='\n' --title="$AppName" --center --width='300' --height='300' --text-align="center" --text="Thanks for instaling $AppName! \nClick next to learn how to use $AppName." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
+  yad --separator='\n' --title="$AppName" --window-icon="${DIRECTORY}/icons/logo.png" --center --width='300' --height='300' --text-align="center" --text="Thanks for instaling $AppName! \nClick next to learn how to use $AppName." --window-icon="${DIRECTORY}/icons/logo.png" --button=Cancel!"${DIRECTORY}/icons/exit.png"!'Exit':0 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':1
 fi
 button=$? #get exit code to determine which button was pressed.
 
@@ -31,9 +31,9 @@ if [ $button -eq 0 ];then
 elif [ $button -eq 1 ];then
   bash "$DIRECTORY/scripts/firstrun/learn"
 elif [ $button -eq 2 ];then
-  nameofnew="$(yad --entry --separator='\n' --title="Create a new Task/Reminder" --center --text-align="center" --entry-label="Name of new Task/Reminder:")"
-  selecteddate="$(yad --calendar --title="Select a date" --height="200" --width="400")"
-  yad --separator='\n' --title="Is this correct?" --center --width='300' --height='300' --text-align="center" --text="Is this correct? \nName of Task/Reminder: '$nameofnew'\nSelected date for new Task/Reminder: '$selecteddate'" --button="No"!"${DIRECTORY}/icons/exit.png"!'No':2 --button='Yes'!"${DIRECTORY}/icons/check.png"!'yes':3
+  nameofnew="$(yad --entry --window-icon="${DIRECTORY}/icons/logo.png" --separator='\n' --title="Create a new Task/Reminder" --center --text-align="center" --entry-label="Name of new Task/Reminder:")"
+  selecteddate="$(yad --calendar --window-icon="${DIRECTORY}/icons/logo.png" --title="Select a date" --height="200" --width="400")"
+  yad --separator='\n' --window-icon="${DIRECTORY}/icons/logo.png" --title="Is this correct?" --center --width='300' --height='300' --text-align="center" --text="Is this correct? \nName of Task/Reminder: '$nameofnew'\nSelected date for new Task/Reminder: '$selecteddate'" --button="No"!"${DIRECTORY}/icons/exit.png"!'No':2 --button='Yes'!"${DIRECTORY}/icons/check.png"!'yes':3
 elif [ $button -eq 3 ];then
   if [ -d "$DIRECTORY/Tasks" ]; then
     yad
