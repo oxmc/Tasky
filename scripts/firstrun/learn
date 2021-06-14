@@ -22,6 +22,10 @@ function SetupWindow {
     elif [ $button -eq 7 ];then
       step=$((step+1))
       echo "True" > $DIRECTORY/data/info/opd
+    elif [ $button -eq 252 ];then
+      echo "True" > $DIRECTORY/data/info/opd
+      echo "User exited"
+    fi
   elif [ $button -eq 252 ];then
     echo "True" > $DIRECTORY/data/info/opd
     echo "User exited"
