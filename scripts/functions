@@ -7,9 +7,9 @@ function error {
 }
 
 function CheckTask {
-  while IFS='|' read -r Name Date Date1 Date2 Date3 Date4 Date5 Date6 Date7 _; do
+  while IFS='|' read -r Name Date _; do
       if [[ $Name || $Date ]]; then
-          items+=( "$Name" "$Date $Date1 $Date2 $Date3 $Date4 $Date5 $Date6 $Date7" )
+          items+=( "$Name" "$Date" )
       else
           items+=( "None" "None" )
       fi
