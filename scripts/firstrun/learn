@@ -7,7 +7,7 @@ step=1
 source "${DIRECTORY}/scripts/functions" || error "failed to source ${DIRECTORY}/scripts/functions"
 
 function SetupWindow {
-  yad --separator='\n' --title="$AppName Part:$step" --image-on-top --image="/home/pi/CryApp/icon.png" --center --width='300' --height='300' --text-align="center" --text="Click the '+' button to add a task or reminder." --window-icon="${DIRECTORY}/icons/logo.png" --button=Exit!"${DIRECTORY}/icons/exit.png"!'Exit':4 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':5
+  yad --separator='\n' --title="$AppName Part:$step" --image-on-top --image="${DIRECTORY}/icons/firstuse/$step.png" --center --width='300' --height='300' --text-align="center" --text="Click the '+' button to add a task or reminder." --window-icon="${DIRECTORY}/icons/logo.png" --button=Exit!"${DIRECTORY}/icons/exit.png"!'Exit':4 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':5
 
   button=$? #get exit code to determine which button was pressed.
 
@@ -15,7 +15,7 @@ function SetupWindow {
     echo "True" > $DIRECTORY/data/info/opd
   elif [ $button -eq 5 ];then
     step=$((step+1))
-    yad --separator='\n' --title="$AppName Part:$step" --image="/home/pi/CryApp/icon.png" --center --width='300' --height='300' --text-align="center" --text="Click the '+' button to add a task or reminder." --window-icon="${DIRECTORY}/icons/logo.png" --button=Exit!"${DIRECTORY}/icons/exit.png"!'Exit':6 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':7
+    yad --separator='\n' --title="$AppName Part:$step" --image="${DIRECTORY}/icons/firstuse/$step.png" --center --width='300' --height='300' --text-align="center" --text="Click the '-' button to remove a task or reminder." --window-icon="${DIRECTORY}/icons/logo.png" --button=Exit!"${DIRECTORY}/icons/exit.png"!'Exit':6 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':7
     button=$? #get exit code to determine which button was pressed.
     if [ $button -eq 6 ];then
       echo "True" > $DIRECTORY/data/info/opd
