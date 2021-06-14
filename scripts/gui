@@ -15,7 +15,6 @@ else #Display StartupMenu.
 fi
 button=$? #get exit code to determine which button was pressed.
 
-
 if [ $button -eq 0 ];then
   exit 0
 elif [ $button -eq 252 ];then
