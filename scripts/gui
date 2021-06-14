@@ -17,7 +17,7 @@ if [ $Used == "True" ]; then
           items+=( "None" "None" )
       fi
   done < <(sort -t'|' -k2 $DIRECTORY/Tasks/Tasks.txt)
-    yad --separator='\n' --title="$AppName" --list --column=Task/Reminder "${items[0]}" --column=Date "${items[1]} --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3"
+    yad --separator='\n' --title="$AppName" --center --width='300' --height='300' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button="Delete Task/Reminder"!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3 --list --column=Task/Reminder "${items[0]}" --column=Date "${items[1]}"
   else
     yad --separator='\n' --title="$AppName" --center --width='300' --height='100' --text-align="center" --text="Welcome to $AppName! \nWhat would you like to do?" --button="Add new Task/Reminder"!"${DIRECTORY}/icons/install.png"!'Create a new Task/Reminder':2 --button='Delete Task/Reminder'!"${DIRECTORY}/icons/uninstall.png"!'Delete Task/Reminder':3
    fi
