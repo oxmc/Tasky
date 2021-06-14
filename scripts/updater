@@ -2,10 +2,8 @@
 
 DIRECTORY="$(readlink -f "$(dirname "$(dirname "$0")")")"
 
-function error {
-  echo -e "\e[91m$1\e[39m"
-  exit 1
-}
+#load functions
+source "${DIRECTORY}/scripts/functions" || error "failed to source ${DIRECTORY}/scripts/functions"
 
 lastupdatecheck="$(cat "${DIRECTORY}/data/last-update-check")"
 if [ -z $lastupdatecheck ];then
