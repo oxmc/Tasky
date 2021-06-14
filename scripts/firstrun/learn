@@ -21,7 +21,7 @@ function SetupWindow {
       yad --separator='\n' --title="How to use $AppName Part:$step" --image="${DIRECTORY}/icons/firstuse/1.png" --center --width='300' --height='300' --text-align="center" --text="" --window-icon="${DIRECTORY}/icons/logo.png" --button=Exit!"${DIRECTORY}/icons/exit.png"!'Exit':6 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':7
     elif [ $button -eq 7 ];then
       step=$((step+1))
-      echo "True" > $DIRECTORY/data/info/opd
+      yad --separator='\n' --title="How to use $AppName Part:$step" --image="${DIRECTORY}/icons/firstuse/1.png" --center --width='300' --height='300' --text-align="center" --text="" --window-icon="${DIRECTORY}/icons/logo.png" --button=Exit!"${DIRECTORY}/icons/exit.png"!'Exit':8 --button='Next'!"${DIRECTORY}/icons/forward.png"!'Continue.':9
     elif [ $button -eq 252 ];then
       echo "True" > $DIRECTORY/data/info/opd
       echo "User exited"
